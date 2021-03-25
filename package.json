@@ -9,7 +9,7 @@
     "types": "dist/esm/index.d.ts",
     "scripts": {
         "build": "npm run clean && tsc",
-        "clean": "rm -rf ./dist",
+        "clean": "",
         "watch": "tsc --watch",
         "test": "jest",
         "removePacked": "rm -f byteowls-capacitor-oauth2-*.tgz",
