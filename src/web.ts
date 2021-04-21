@@ -53,6 +53,8 @@ export class OAuth2ClientPluginWeb extends WebPlugin implements OAuth2ClientPlug
                 this.intervalId = window.setInterval(() => {
                     if (loopCount-- < 0) {
                         this.closeWindow();
+                    } else if (!this.windowHandle) {
+                        return;
                     } else if (this.windowHandle.closed && !this.windowClosedByPlugin) {
                         window.clearInterval(this.intervalId);
                         reject(new Error("USER_CANCELLED"));
