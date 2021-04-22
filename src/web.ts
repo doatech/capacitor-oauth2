@@ -158,7 +158,9 @@ export class OAuth2ClientPluginWeb extends WebPlugin implements OAuth2ClientPlug
 
     private closeWindow() {
         window.clearInterval(this.intervalId);
-        this.windowHandle.close();
+        if (this.windowHandle) {
+            this.windowHandle.close();
+        }
         this.windowClosedByPlugin = true;
     }
 }
