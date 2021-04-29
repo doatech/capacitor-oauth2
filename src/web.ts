@@ -10,6 +10,7 @@ export class OAuth2ClientPluginWeb extends WebPlugin implements OAuth2ClientPlug
     private loopCount = 2000;
     private intervalLength = 100;
     private windowClosedByPlugin: boolean;
+    private tokenExchangeRunning: boolean = false;
 
     constructor() {
         super({
@@ -67,6 +68,10 @@ export class OAuth2ClientPluginWeb extends WebPlugin implements OAuth2ClientPlug
                         if (href != null && href.indexOf(this.webOptions.redirectUrl) >= 0) {
                             let urlParamObj = WebUtils.getUrlParams(href);
                             if (urlParamObj) {
+                                if(this.tokenExchangeRunning) {
+                                    return;
+                                }
+                                this.tokenExchangeRunning = true;
                                 window.clearInterval(this.intervalId);
                                 // check state
                                 if (urlParamObj.state === this.webOptions.state) {
