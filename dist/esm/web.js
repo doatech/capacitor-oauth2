@@ -19,6 +19,7 @@ export class OAuth2ClientPluginWeb extends WebPlugin {
         this.intervalId = null;
         this.loopCount = 2000;
         this.intervalLength = 100;
+        this.tokenExchangeRunning = false;
     }
     /**
      * Get a new access token using an existing refresh token.
@@ -76,6 +77,10 @@ export class OAuth2ClientPluginWeb extends WebPlugin {
                             if (href != null && href.indexOf(this.webOptions.redirectUrl) >= 0) {
                                 let urlParamObj = WebUtils.getUrlParams(href);
                                 if (urlParamObj) {
+                                    if (this.tokenExchangeRunning) {
+                                        return;
+                                    }
+                                    this.tokenExchangeRunning = true;
                                     window.clearInterval(this.intervalId);
                                     // check state
                                     if (urlParamObj.state === this.webOptions.state) {

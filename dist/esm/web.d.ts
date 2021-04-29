@@ -7,6 +7,7 @@ export declare class OAuth2ClientPluginWeb extends WebPlugin implements OAuth2Cl
     private loopCount;
     private intervalLength;
     private windowClosedByPlugin;
+    private tokenExchangeRunning;
     constructor();
     /**
      * Get a new access token using an existing refresh token.
