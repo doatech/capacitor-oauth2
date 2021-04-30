@@ -33,6 +33,7 @@ export class OAuth2ClientPluginWeb extends WebPlugin {
     }
     authenticate(options) {
         return __awaiter(this, void 0, void 0, function* () {
+            this.tokenExchangeRunning = false;
             this.webOptions = yield WebUtils.buildWebOptions(options);
             return new Promise((resolve, reject) => {
                 // validate

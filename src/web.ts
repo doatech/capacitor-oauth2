@@ -29,6 +29,7 @@ export class OAuth2ClientPluginWeb extends WebPlugin implements OAuth2ClientPlug
     }
 
     async authenticate(options: OAuth2AuthenticateOptions): Promise<any> {
+        this.tokenExchangeRunning = false;
         this.webOptions = await WebUtils.buildWebOptions(options);
         return new Promise<any>((resolve, reject) => {
             // validate
